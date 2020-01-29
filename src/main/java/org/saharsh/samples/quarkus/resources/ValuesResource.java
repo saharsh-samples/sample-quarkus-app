@@ -15,6 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.saharsh.samples.quarkus.model.StoredValue;
 import org.saharsh.samples.quarkus.service.StorageService;
 
@@ -31,17 +32,20 @@ public class ValuesResource {
 	}
 
 	@GET
+	@Timed
 	public Map<Long, StoredValue> retrieveAll() {
 		return storage.retrieveAll();
 	}
 
 	@POST
+	@Timed
 	public StoredValue create(String value) {
 		return storage.store(value);
 	}
 
 	@GET
 	@Path("{id: \\d+}")
+	@Timed
 	public StoredValue retreive(@PathParam("id") long id) {
 		final Optional<StoredValue> retrieved = storage.retreiveOne(id);
 		if (!retrieved.isPresent()) {
@@ -52,6 +56,7 @@ public class ValuesResource {
 
 	@PUT
 	@Path("{id: \\d+}")
+	@Timed
 	public StoredValue update(@PathParam("id") long id, String newValue) {
 		final Optional<StoredValue> updated = storage.update(id, newValue);
 		if (!updated.isPresent()) {
@@ -62,6 +67,7 @@ public class ValuesResource {
 
 	@DELETE
 	@Path("{id: \\d+}")
+	@Timed
 	public StoredValue delete(@PathParam("id") long id) {
 		final Optional<StoredValue> deleted = storage.delete(id);
 		if (!deleted.isPresent()) {

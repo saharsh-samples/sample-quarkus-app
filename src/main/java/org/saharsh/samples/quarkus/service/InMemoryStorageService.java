@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import javax.enterprise.context.ApplicationScoped;
 
+import org.eclipse.microprofile.metrics.annotation.Gauge;
 import org.saharsh.samples.quarkus.model.StoredValue;
 
 @ApplicationScoped
@@ -59,6 +60,7 @@ public class InMemoryStorageService implements StorageService {
 		return storeView;
 	}
 
+	@Gauge(unit = "count")
 	public long size() {
 		return store.size();
 	}
