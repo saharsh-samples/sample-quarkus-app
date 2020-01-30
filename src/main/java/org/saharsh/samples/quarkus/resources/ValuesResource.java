@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.saharsh.samples.quarkus.model.StoredValue;
+import org.saharsh.samples.quarkus.service.ConfiguredStorage;
 import org.saharsh.samples.quarkus.service.StorageService;
 
 @Path("/api/values")
@@ -27,7 +28,7 @@ public class ValuesResource {
 	private final StorageService storage;
 
 	@Inject
-	public ValuesResource(StorageService storage) {
+	public ValuesResource(@ConfiguredStorage StorageService storage) {
 		this.storage = storage;
 	}
 

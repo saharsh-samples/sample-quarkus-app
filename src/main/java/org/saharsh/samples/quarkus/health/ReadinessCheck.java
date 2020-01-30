@@ -7,6 +7,7 @@ import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.eclipse.microprofile.health.HealthCheckResponseBuilder;
 import org.eclipse.microprofile.health.Readiness;
+import org.saharsh.samples.quarkus.service.ConfiguredStorage;
 import org.saharsh.samples.quarkus.service.StorageService;
 
 @Readiness
@@ -16,7 +17,7 @@ public class ReadinessCheck implements HealthCheck {
 	private final StorageService storageService;
 
 	@Inject
-	public ReadinessCheck(StorageService storageService) {
+	public ReadinessCheck(@ConfiguredStorage StorageService storageService) {
 		this.storageService = storageService;
 	}
 

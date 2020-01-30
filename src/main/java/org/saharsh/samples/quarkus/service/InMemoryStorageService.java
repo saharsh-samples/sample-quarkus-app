@@ -60,14 +60,14 @@ public class InMemoryStorageService implements StorageService {
 		return storeView;
 	}
 
-	@Gauge(unit = "count")
-	public long size() {
-		return store.size();
-	}
-
 	@Override
 	public boolean isReady() {
 		return true;
+	}
+
+	@Gauge(unit = "count")
+	public long size() {
+		return store.size();
 	}
 
 }
