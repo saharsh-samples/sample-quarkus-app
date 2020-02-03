@@ -11,6 +11,9 @@ import javax.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.metrics.annotation.Gauge;
 import org.saharsh.samples.quarkus.model.StoredValue;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
+@RegisterForReflection(fields = false, methods = true)
 @ApplicationScoped
 public class InMemoryStorageService implements StorageService {
 

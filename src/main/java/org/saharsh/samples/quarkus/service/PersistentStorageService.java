@@ -16,6 +16,9 @@ import org.eclipse.microprofile.metrics.annotation.Gauge;
 import org.saharsh.samples.quarkus.model.StoredValue;
 import org.saharsh.samples.quarkus.persistence.PersistedValue;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
+@RegisterForReflection(fields = false, methods = true)
 @ApplicationScoped
 public class PersistentStorageService implements StorageService {
 
