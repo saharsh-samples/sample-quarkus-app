@@ -1,7 +1,7 @@
 ####
 # Build
 ###
-FROM quay.io/quarkus/centos-quarkus-maven:19.3.1-java8 AS build
+FROM quay.io/quarkus/centos-quarkus-maven:20.0.0-java11 AS build
 COPY src /usr/src/app/src
 COPY pom.xml /usr/src/app
 USER root
@@ -12,16 +12,16 @@ RUN mvn -f /usr/src/app/pom.xml clean package
 ####
 # Package Runtime
 ####
-FROM registry.access.redhat.com/ubi8/ubi-minimal:8.1
+FROM registry.access.redhat.com/ubi8/ubi-minimal:8.1-409
 
-ARG JAVA_PACKAGE=java-1.8.0-openjdk-headless
+ARG JAVA_PACKAGE=java-11-openjdk-headless
 ARG RUN_JAVA_VERSION=1.3.5
 
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en'
 
 # Install java and the run-java script
 # Also set up permissions for user `1001`
-RUN microdnf install openssl curl ca-certificates ${JAVA_PACKAGE} \
+RUN microdnf install curl ca-certificates ${JAVA_PACKAGE} \
     && microdnf update \
     && microdnf clean all \
     && mkdir /deployments \
